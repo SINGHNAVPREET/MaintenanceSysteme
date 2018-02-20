@@ -116,13 +116,17 @@ public class VueAjouterEvenement extends AppCompatActivity {
             if (champDescriptions.getText().toString().trim().length()<1) {
                 accesseurDAO.ajouterEvenement(evenement);
                 naviguerRetourEvenements();
-               
+                Toast test = Toast.makeText(getApplicationContext(),"Evènement ajouté",Toast.LENGTH_LONG);
+                test.show();
+
             }
             else{
                 String description = champDescriptions.getText().toString();
                 evenement.setDescription(description);
                 accesseurDAO.ajouterEvenement(evenement);
                 naviguerRetourEvenements();
+                Toast test = Toast.makeText(getApplicationContext(),"Evènement ajouté",Toast.LENGTH_LONG);
+                test.show();
             }
 
         }catch (Exception ex){
