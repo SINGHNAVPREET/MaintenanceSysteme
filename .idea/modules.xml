@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://C:\Users\1732986\Downloads\devoir-android-2017-lucasmarrel-master\devoir-android-2017-lucasmarrel-master\Evenements.iml" filepath="C:\Users\1732986\Downloads\devoir-android-2017-lucasmarrel-master\devoir-android-2017-lucasmarrel-master\Evenements.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MaintenanceSysteme.iml" filepath="$PROJECT_DIR$/MaintenanceSysteme.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/devoir-android-2017-lucasmarrel-master.iml" filepath="$PROJECT_DIR$/devoir-android-2017-lucasmarrel-master.iml" />
     </modules>
   </component>
 </project>

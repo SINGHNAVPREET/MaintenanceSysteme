@@ -47,6 +47,8 @@ public class VueAjouterEvenement extends AppCompatActivity {
                 ajouterEvenement(view);
             }
         });
+        boutonAnnuler = (Button)findViewById(R.id.action_annuler_ajout_evenement);
+
     }
     protected void ajouterEvenement(View view){
 
