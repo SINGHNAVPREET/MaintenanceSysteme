@@ -48,7 +48,12 @@ public class VueAjouterEvenement extends AppCompatActivity {
             }
         });
         boutonAnnuler = (Button)findViewById(R.id.action_annuler_ajout_evenement);
-
+        boutonAnnuler.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                naviguerRetourEvenements();
+            }
+        });
     }
     protected void ajouterEvenement(View view){
 
