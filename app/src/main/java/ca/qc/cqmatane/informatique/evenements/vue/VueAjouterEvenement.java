@@ -135,7 +135,6 @@ public class VueAjouterEvenement extends AppCompatActivity {
             return;
         }
 
-
     }
 
     public void naviguerRetourEvenements(){
