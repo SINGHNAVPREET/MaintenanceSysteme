@@ -115,12 +115,14 @@ public class VueAjouterEvenement extends AppCompatActivity {
 
             if (champDescriptions.getText().toString().trim().length()<1) {
                 accesseurDAO.ajouterEvenement(evenement);
+                naviguerRetourEvenements();
                
             }
             else{
                 String description = champDescriptions.getText().toString();
                 evenement.setDescription(description);
                 accesseurDAO.ajouterEvenement(evenement);
+                naviguerRetourEvenements();
             }
 
         }catch (Exception ex){
