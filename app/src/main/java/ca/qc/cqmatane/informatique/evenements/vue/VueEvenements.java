@@ -1,6 +1,7 @@
 package ca.qc.cqmatane.informatique.evenements.vue;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -9,8 +10,10 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -28,12 +31,17 @@ public class VueEvenements extends AppCompatActivity {
     protected final static int ACTIVITE_AJOUTER_EVENEMENT = 1;
     protected final static int ACTIVITE_MODIFIER_EVENEMENT = 2;
 
+    private static final String PREFS_NAME = "prefs";
+    private static final String PREF_DARK_THEME = "dark_theme";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vue_evenements);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Switch toggle = (Switch) findViewById(R.id.switch1);
 
         BaseDeDonnees.getInstance(getApplicationContext());
         accesseurEvenements = DAOEvenements.getInstance();
@@ -47,6 +55,13 @@ public class VueEvenements extends AppCompatActivity {
                 Intent intentionNaviguerVueModificationEvenement = new Intent(VueEvenements.this, VueModifierEvenement.class);
                 intentionNaviguerVueModificationEvenement.putExtra("id_evenement",evenement.get("id_evenement"));
                 startActivityForResult(intentionNaviguerVueModificationEvenement,ACTIVITE_MODIFIER_EVENEMENT);
+            }
+        });
+
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                toggleTheme(isChecked);
             }
         });
 
@@ -110,5 +125,16 @@ public class VueEvenements extends AppCompatActivity {
 
         vueListeEvenements.setAdapter(adapteurVueListeEvenements);
 
+    }
+
+    private void toggleTheme(boolean darkTheme) {
+        SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
+        editor.putBoolean(PREF_DARK_THEME, darkTheme);
+        editor.apply();
+
+        Intent intent = getIntent();
+        finish();
+
+        startActivity(intent);
     }
 }
