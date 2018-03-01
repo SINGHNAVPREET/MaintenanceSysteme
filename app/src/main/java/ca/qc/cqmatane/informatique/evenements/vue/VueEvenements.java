@@ -36,12 +36,27 @@ public class VueEvenements extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        boolean useDarkTheme = preferences.getBoolean(PREF_DARK_THEME, false);
+
+        if(useDarkTheme) {
+            setTheme(R.style.AppTheme_Dark_NoActionBar);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vue_evenements);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         Switch toggle = (Switch) findViewById(R.id.switch1);
+        toggle.setChecked(useDarkTheme);
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                toggleTheme(isChecked);
+            }
+        });
 
         BaseDeDonnees.getInstance(getApplicationContext());
         accesseurEvenements = DAOEvenements.getInstance();
@@ -58,12 +73,7 @@ public class VueEvenements extends AppCompatActivity {
             }
         });
 
-        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
-                toggleTheme(isChecked);
-            }
-        });
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.action_ajouter_evenement);
         fab.setOnClickListener(new View.OnClickListener() {
