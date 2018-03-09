@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +16,7 @@ import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -146,5 +149,30 @@ public class VueEvenements extends AppCompatActivity {
         finish();
 
         startActivity(intent);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+             ContextMenuInfo menuInfo) {
+        if(v.getId() == R.id.vue_liste_evenements) {
+            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+            menu.setHeaderTitle(listeEvenements.get(info.position).get("titre"));
+            String[] menuItems = getResources().getStringArray(R.array.menu);
+            menu.add(Menu.NONE, 0, 0, menuItems[0]);
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int menuItemIndex = item.getItemId();
+        String[] menuItems = getResources().getStringArray(R.array.menu);
+        String menuItemName = menuItems[menuItemIndex];
+        String listItemName = listeEvenements.get(info.position).get("titre");
+
+        TextView text = (TextView) findViewById(R.id.action_settings);
+        text.setText(String.format("Selected %s for item %s", menuItemName, listItemName));
+        return true;
+
     }
 }
